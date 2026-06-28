@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lumière Salon — Where Style Begins</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --charcoal: #1A1A1A;
+    --ivory: #F9F4EE;
+    --gold: #C9A97A;
+    --sage: #8A9E8C;
+    --mauve: #7D6B7D;
+    --warm-grey: #6B6560;
+    --light-sage: #EDF0EC;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--ivory);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(249,244,238,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,169,122,0.2);
+    transition: all 0.3s ease;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--warm-grey);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--charcoal);
+    color: var(--ivory) !important;
+    padding: 0.6rem 1.5rem;
+    border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold) !important; color: var(--charcoal) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--charcoal);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem 5rem 5rem;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--ivory);
+    margin-bottom: 1.75rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(249,244,238,0.65);
+    max-width: 380px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--charcoal);
+    padding: 0.9rem 2.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201,169,122,0.4);
+  }
+
+  .btn-ghost {
+    color: var(--ivory);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+    letter-spacing: 0.04em;
+  }
+
+  .btn-ghost:hover { color: var(--gold); }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.1s forwards;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: rgba(249,244,238,0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--light-sage);
+  }
+
+  .hero-img-wrapper {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.4s forwards;
+  }
+
+  .hero-img-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,169,122,0.15) 0%, transparent 60%);
+  }
+
+  /* Decorative scissors SVG */
+  .scissors-deco {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 60px;
+    opacity: 0.25;
+    z-index: 2;
+  }
+
+  .hero-img-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.85);
+  }
+
+  /* Placeholder gradient for hero image */
+  .hero-img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #D4B896 0%, #C1A882 25%, #8A9E8C 60%, #7D6B7D 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    background: var(--charcoal);
+    color: var(--ivory);
+    padding: 1.2rem 1.5rem;
+    border-radius: 3px;
+    z-index: 5;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.2s forwards;
+  }
+
+  .hero-badge-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-badge-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-strip {
+    background: var(--gold);
+    padding: 0.85rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .marquee-inner {
+    display: inline-flex;
+    gap: 3rem;
+    animation: marquee 18s linear infinite;
+  }
+
+  .marquee-item {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--charcoal);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .marquee-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--charcoal);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    padding: 7rem 5rem;
+    background: var(--ivory);
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+
+  .section-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--charcoal);
+  }
+
+  .section-title em { color: var(--mauve); font-style: italic; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .service-card:hover { transform: translateY(-4px); }
+
+  .service-card:hover .service-overlay { opacity: 1; }
+  .service-card:hover .service-icon { transform: scale(1.1); }
+
+  .service-card--large { grid-row: 1 / 3; }
+
+  .service-inner {
+    height: 100%;
+    min-height: 220px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+  }
+
+  .service-card--large .service-inner { min-height: 500px; }
+
+  .service-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .service-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(201,169,122,0.15);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1;
+  }
+
+  .s1 .service-bg { background: linear-gradient(145deg, #2C2518 0%, #4A3C28 40%, #C9A97A 100%); }
+  .s2 .service-bg { background: linear-gradient(135deg, #3D3540 0%, #7D6B7D 100%); }
+  .s3 .service-bg { background: linear-gradient(135deg, #1E2E22 0%, #8A9E8C 100%); }
+  .s4 .service-bg { background: linear-gradient(135deg, #2A2020 0%, #6B5050 100%); }
+  .s5 .service-bg { background: linear-gradient(135deg, #1A2430 0%, #4A7090 100%); }
+
+  .service-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s;
+    display: inline-block;
+  }
+
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--ivory);
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .service-desc {
+    font-size: 0.82rem;
+    color: rgba(249,244,238,0.65);
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+  }
+
+  .service-price {
+    margin-top: 1.25rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── EXPERIENCE ── */
+  .experience {
+    background: var(--charcoal);
+    padding: 7rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .exp-left .section-tag { color: var(--sage); }
+  .exp-left .section-title { color: var(--ivory); }
+
+  .exp-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(249,244,238,0.6);
+    margin: 1.5rem 0 2.5rem;
+  }
+
+  .exp-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .exp-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .exp-feature-icon {
+    width: 42px;
+    height: 42px;
+    background: rgba(201,169,122,0.12);
+    border: 1px solid rgba(201,169,122,0.3);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .exp-feature-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ivory);
+    margin-bottom: 0.2rem;
+  }
+
+  .exp-feature-text {
+    font-size: 0.82rem;
+    color: rgba(249,244,238,0.5);
+    line-height: 1.6;
+  }
+
+  .exp-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .exp-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    padding: 2rem 1.75rem;
+    transition: border-color 0.3s;
+  }
+
+  .exp-card:hover { border-color: rgba(201,169,122,0.35); }
+
+  .exp-card--tall { grid-row: 1 / 3; padding: 2.5rem; }
+
+  .exp-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(249,244,238,0.45);
+  }
+
+  /* ── TEAM ── */
+  .team {
+    padding: 7rem 5rem;
+    background: var(--light-sage);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+
+  .team-card {
+    background: var(--ivory);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+  }
+
+  .team-card:hover {
+    box-shadow: 0 16px 48px rgba(26,26,26,0.1);
+  }
+
+  .team-img {
+    height: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .team-img-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+  }
+
+  .team-card:hover .team-img-inner { transform: scale(1.04); }
+
+  .t1 { background: linear-gradient(160deg, #D4B896 0%, #C9A97A 60%, #8A7060 100%); }
+  .t2 { background: linear-gradient(160deg, #B8C4B8 0%, #8A9E8C 60%, #5A6E5A 100%); }
+  .t3 { background: linear-gradient(160deg, #C4B0C4 0%, #7D6B7D 60%, #5A4E5A 100%); }
+
+  .team-avatar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    filter: opacity(0.6);
+  }
+
+  .team-info {
+    padding: 1.5rem 1.75rem 2rem;
+  }
+
+  .team-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 0.2rem;
+  }
+
+  .team-role {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mauve);
+    font-weight: 600;
+    margin-bottom: 0.9rem;
+  }
+
+  .team-bio {
+    font-size: 0.84rem;
+    line-height: 1.65;
+    color: var(--warm-grey);
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    padding: 7rem 5rem;
+    background: var(--ivory);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+
+  .testi-card {
+    background: white;
+    border-radius: 4px;
+    padding: 2.25rem;
+    box-shadow: 0 2px 16px rgba(26,26,26,0.06);
+    position: relative;
+  }
+
+  .testi-stars {
+    color: var(--gold);
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.1em;
+  }
+
+  .testi-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+  }
+
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  .testi-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ta1 { background: #E8D5C0; }
+  .ta2 { background: #D5E0D5; }
+  .ta3 { background: #DDD0DD; }
+
+  .testi-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--charcoal);
+  }
+
+  .testi-since {
+    font-size: 0.72rem;
+    color: var(--warm-grey);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── BOOKING ── */
+  .booking {
+    background: var(--charcoal);
+    padding: 6rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .booking-text .section-tag { color: var(--gold); }
+  .booking-text .section-title { color: var(--ivory); margin-bottom: 1rem; }
+  .booking-sub {
+    color: rgba(249,244,238,0.55);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .booking-form {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    padding: 2.5rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group:last-of-type { margin-bottom: 0; }
+
+  .form-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(249,244,238,0.45);
+    font-weight: 500;
+  }
+
+  .form-input, .form-select {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    padding: 0.75rem 1rem;
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .form-input::placeholder { color: rgba(249,244,238,0.25); }
+  .form-input:focus, .form-select:focus { border-color: var(--gold); }
+  .form-select option { background: var(--charcoal); }
+
+  .btn-book {
+    width: 100%;
+    background: var(--gold);
+    color: var(--charcoal);
+    padding: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-top: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-book:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201,169,122,0.35);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #111;
+    padding: 4rem 5rem 2.5rem;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 2rem;
+  }
+
+  .footer-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ivory);
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-brand-name span { color: var(--gold); }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-col-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.4);
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-contact-item {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 0.65rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-link {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: rgba(255,255,255,0.4);
+    transition: all 0.2s;
+  }
+
+  .social-link:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { clip-path: none; padding: 5rem 2rem 3rem; }
+    .hero-right { height: 320px; }
+    .services, .experience, .team, .testimonials, .booking, footer { padding: 4rem 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card--large { grid-row: auto; }
+    .experience { grid-template-columns: 1fr; gap: 3rem; }
+    .exp-right { grid-template-columns: 1fr 1fr; }
+    .exp-card--tall { grid-row: auto; }
+    .team-grid, .testimonials-grid { grid-template-columns: 1fr; }
+    .booking { grid-template-columns: 1fr; gap: 2.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Lumi<span>ère</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#experience">About</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#booking" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">✦ Premium Hair & Beauty Studio</p>
+    <h1 class="hero-title">Your Style,<br /><em>Elevated.</em></h1>
+    <p class="hero-sub">Expert cuts, color, and care tailored to you. Step in for an experience that's as personal as the style you leave with.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">Book Appointment</a>
+      <a href="#services" class="btn-ghost">Explore Services →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Years Open</div>
+      </div>
+      <div>
+        <div class="stat-num">3k+</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div>
+        <div class="stat-num">8</div>
+        <div class="stat-label">Specialists</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-img-wrapper">
+      <div class="hero-img-placeholder">
+        <div style="font-size:7rem;filter:opacity(0.25)">✂️</div>
+        <div style="font-family:'Playfair Display',serif;color:rgba(255,255,255,0.3);font-size:1.1rem;font-style:italic;letter-spacing:0.05em;">Your best look awaits</div>
+      </div>
+    </div>
+
+    <svg class="scissors-deco" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="80" r="12" stroke="#C9A97A" stroke-width="4"/>
+      <circle cx="20" cy="55" r="12" stroke="#C9A97A" stroke-width="4"/>
+      <line x1="30" y1="72" x2="85" y2="20" stroke="#C9A97A" stroke-width="4" stroke-linecap="round"/>
+      <line x1="30" y1="63" x2="85" y2="20" stroke="#C9A97A" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+
+    <div class="hero-badge">
+      <div class="hero-badge-title">Rated 4.9 / 5</div>
+      <div class="hero-badge-text">200+ Google Reviews</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item"><span class="marquee-dot"></span> Haircuts & Styling</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Color & Balayage</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Bridal Packages</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Skin & Facials</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Nail Art</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Beard Grooming</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Keratin Treatment</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Haircuts & Styling</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Color & Balayage</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Bridal Packages</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Skin & Facials</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Nail Art</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Beard Grooming</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Keratin Treatment</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header reveal">
+    <div>
+      <span class="section-tag">✦ What We Offer</span>
+      <h2 class="section-title">Services Crafted<br />for <em>Every Style</em></h2>
+    </div>
+    <a href="#booking" class="btn-primary" style="flex-shrink:0;">View All Services</a>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card s1 service-card--large reveal reveal-delay-1">
+      <div class="service-inner">
+        <div class="service-bg"></div>
+        <div class="service-overlay"></div>
+        <span class="service-icon">✂️</span>
+        <div class="service-name">Hair Cuts & Styling</div>
+        <div class="service-desc">From classic bobs to layered cuts — precision styling shaped to your face, personality, and lifestyle.</div>
+        <div class="service-price">From ₹499 — Book Now →</div>
+      </div>
+    </div>
+
+    <div class="service-card s2 reveal reveal-delay-1">
+      <div class="service-inner">
+        <div class="service-bg"></div>
+        <div class="service-overlay"></div>
+        <span class="service-icon">🎨</span>
+        <div class="service-name">Color & Balayage</div>
+        <div class="service-desc">Sun-kissed balayage, vivid fashion shades, or a root touch-up — we get color right.</div>
+        <div class="service-price">From ₹999 — Book Now →</div>
+      </div>
+    </div>
+
+    <div class="service-card s3 reveal reveal-delay-2">
+      <div class="service-inner">
+        <div class="service-bg"></div>
+        <div class="service-overlay"></div>
+        <span class="service-icon">💆</span>
+        <div class="service-name">Skin & Facials</div>
+        <div class="service-desc">Custom facials, clean-ups, and glow treatments for clear, radiant skin every day.</div>
+        <div class="service-price">From ₹699 — Book Now →</div>
+      </div>
+    </div>
+
+    <div class="service-card s4 reveal reveal-delay-2">
+      <div class="service-inner">
+        <div class="service-bg"></div>
+        <div class="service-overlay"></div>
+        <span class="service-icon">💍</span>
+        <div class="service-name">Bridal Packages</div>
+        <div class="service-desc">Complete bridal prep — hair, makeup, draping, and more for your most important day.</div>
+        <div class="service-price">From ₹3,999 — Enquire →</div>
+      </div>
+    </div>
+
+    <div class="service-card s5 reveal reveal-delay-3">
+      <div class="service-inner">
+        <div class="service-bg"></div>
+        <div class="service-overlay"></div>
+        <span class="service-icon">💅</span>
+        <div class="service-name">Nail & Beauty</div>
+        <div class="service-desc">Gel nails, nail art, waxing, threading, and more beauty services under one roof.</div>
+        <div class="service-price">From ₹299 — Book Now →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="exp-left">
+    <span class="section-tag">✦ The Lumière Difference</span>
+    <h2 class="section-title" style="color:var(--ivory);">More Than a Salon —<br /><em style="color:var(--sage);">An Experience.</em></h2>
+    <p class="exp-text">Every visit to Lumière is designed to feel like a moment away — where expert craft meets unhurried care. We use only premium products and take time to understand what you actually want.</p>
+    <div class="exp-features reveal">
+      <div class="exp-feature">
+        <div class="exp-feature-icon">🌿</div>
+        <div>
+          <div class="exp-feature-title">Premium, Clean Products</div>
+          <div class="exp-feature-text">We use sulfate-free, cruelty-free and salon-grade products on every client.</div>
+        </div>
+      </div>
+      <div class="exp-feature">
+        <div class="exp-feature-icon">🎓</div>
+        <div>
+          <div class="exp-feature-title">Certified Specialists</div>
+          <div class="exp-feature-text">Our team trains annually at national and international workshops.</div>
+        </div>
+      </div>
+      <div class="exp-feature">
+        <div class="exp-feature-icon">⏰</div>
+        <div>
+          <div class="exp-feature-title">On-Time, Every Time</div>
+          <div class="exp-feature-text">Book a slot and we'll be ready — no long waits, ever.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-right reveal">
+    <div class="exp-card exp-card--tall">
+      <div class="exp-num">12+</div>
+      <div class="exp-label">Years of Excellence</div>
+      <div style="margin-top:1.5rem;font-size:0.85rem;color:rgba(249,244,238,0.4);line-height:1.7;">Serving the city since 2012, Lumière has become a trusted name for style and care.</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-num">3k+</div>
+      <div class="exp-label">Clients Served</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-num">4.9★</div>
+      <div class="exp-label">Average Rating</div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="section-header reveal">
+    <div>
+      <span class="section-tag">✦ Meet the Team</span>
+      <h2 class="section-title">Experts Behind<br />Every <em>Great Look</em></h2>
+    </div>
+  </div>
+
+  <div class="team-grid">
+    <div class="team-card reveal reveal-delay-1">
+      <div class="team-img">
+        <div class="team-img-inner t1">
+          <div class="team-avatar">👩‍🦱</div>
+        </div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Priya Anand</div>
+        <div class="team-role">Senior Hair Stylist</div>
+        <div class="team-bio">With 10+ years specialising in curly and textured hair, Priya is known for her instinct, precision, and warmth. Clients leave her chair feeling like themselves — only better.</div>
+      </div>
+    </div>
+
+    <div class="team-card reveal reveal-delay-2">
+      <div class="team-img">
+        <div class="team-img-inner t2">
+          <div class="team-avatar">👨‍🦲</div>
+        </div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Rajan Mehta</div>
+        <div class="team-role">Color Specialist</div>
+        <div class="team-bio">Rajan's eye for tone and technique has made him the go-to for balayage and complex color corrections. He treats every head of hair as a canvas.</div>
+      </div>
+    </div>
+
+    <div class="team-card reveal reveal-delay-3">
+      <div class="team-img">
+        <div class="team-img-inner t3">
+          <div class="team-avatar">👩‍🦰</div>
+        </div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Deepa Krishnan</div>
+        <div class="team-role">Skin & Beauty Expert</div>
+        <div class="team-bio">A certified aesthetician, Deepa believes beautiful skin is built slowly and consistently. Her facials are part ritual, part transformation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-header reveal">
+    <div>
+      <span class="section-tag">✦ Client Love</span>
+      <h2 class="section-title">What People Are<br /><em>Saying</em></h2>
+    </div>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testi-card reveal reveal-delay-1">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Priya listened to everything I wanted and gave me a cut that finally suits my face. I've never felt this good leaving a salon. I won't go anywhere else."</p>
+      <div class="testi-author">
+        <div class="testi-avatar ta1">🙂</div>
+        <div>
+          <div class="testi-name">Ananya S.</div>
+          <div class="testi-since">Client since 2020</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal reveal-delay-2">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Rajan did a full balayage + toner on my hair and the result was exactly the Pinterest photo I showed him. Professional, quick, and honestly magical."</p>
+      <div class="testi-author">
+        <div class="testi-avatar ta2">🙂</div>
+        <div>
+          <div class="testi-name">Kiran V.</div>
+          <div class="testi-since">Client since 2022</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal reveal-delay-3">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Booked Lumière for my wedding and it was the best decision I made. The entire team was calm, skilled, and made me look absolutely stunning. Couldn't have asked for more."</p>
+      <div class="testi-author">
+        <div class="testi-avatar ta3">🙂</div>
+        <div>
+          <div class="testi-name">Meena R.</div>
+          <div class="testi-since">Bridal client 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-text reveal">
+    <span class="section-tag">✦ Reserve Your Slot</span>
+    <h2 class="section-title">Ready for Your<br /><em style="color:var(--gold);">Best Look?</em></h2>
+    <p class="booking-sub">Booking takes 60 seconds. Choose your service, pick your stylist, and we'll confirm your appointment within an hour.</p>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;">
+      <div class="exp-feature" style="margin:0;">
+        <div style="color:var(--gold);font-size:1rem;">📍</div>
+        <div style="color:rgba(249,244,238,0.55);font-size:0.85rem;">12 MG Road, Near Central Mall, City Centre</div>
+      </div>
+      <div class="exp-feature" style="margin:0;">
+        <div style="color:var(--gold);font-size:1rem;">🕐</div>
+        <div style="color:rgba(249,244,238,0.55);font-size:0.85rem;">Open Mon–Sat: 9 AM – 8 PM &nbsp;|&nbsp; Sun: 10 AM – 6 PM</div>
+      </div>
+      <div class="exp-feature" style="margin:0;">
+        <div style="color:var(--gold);font-size:1rem;">📞</div>
+        <div style="color:rgba(249,244,238,0.55);font-size:0.85rem;">+91 98765 43210</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="booking-form reveal reveal-delay-1">
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">First Name</label>
+        <input type="text" class="form-input" placeholder="Priya" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Last Name</label>
+        <input type="text" class="form-input" placeholder="Sharma" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone Number</label>
+      <input type="tel" class="form-input" placeholder="+91 98765 43210" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Service</label>
+      <select class="form-select">
+        <option value="">Select a service…</option>
+        <option>Haircut & Styling</option>
+        <option>Color & Balayage</option>
+        <option>Skin & Facial</option>
+        <option>Bridal Package</option>
+        <option>Nail Art</option>
+        <option>Beard Grooming</option>
+        <option>Keratin Treatment</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group" style="margin:0;">
+        <label class="form-label">Preferred Date</label>
+        <input type="date" class="form-input" />
+      </div>
+      <div class="form-group" style="margin:0;">
+        <label class="form-label">Preferred Time</label>
+        <select class="form-select">
+          <option>9:00 AM</option>
+          <option>10:00 AM</option>
+          <option>11:00 AM</option>
+          <option>12:00 PM</option>
+          <option>2:00 PM</option>
+          <option>4:00 PM</option>
+          <option>6:00 PM</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-book" onclick="alert('Booking request sent! We\'ll confirm within 1 hour. ✨')">
+      Confirm Appointment ✦
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name">Lumi<span>ère</span></div>
+      <p class="footer-tagline">A premium salon experience built on skill, care, and the belief that everyone deserves to feel their best.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#">Haircuts</a></li>
+        <li><a href="#">Color & Balayage</a></li>
+        <li><a href="#">Skin & Facials</a></li>
+        <li><a href="#">Bridal</a></li>
+        <li><a href="#">Nail Art</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Studio</div>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Meet the Team</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Offers</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <div class="footer-contact-item">📍 12 MG Road, City Centre</div>
+      <div class="footer-contact-item">📞 +91 98765 43210</div>
+      <div class="footer-contact-item">✉️ hello@lumieresalon.in</div>
+      <div class="footer-contact-item">🕐 Mon–Sat 9AM–8PM</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Lumière Salon. All rights reserved.</div>
+    <div class="social-links">
+      <a class="social-link" href="#" title="Instagram">📷</a>
+      <a class="social-link" href="#" title="Facebook">f</a>
+      <a class="social-link" href="#" title="WhatsApp">💬</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth nav shadow on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.style.boxShadow = '0 2px 24px rgba(26,26,26,0.1)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+</script>
+</body>
+</html>
